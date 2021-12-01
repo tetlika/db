@@ -1,5 +1,5 @@
 
-def process_input(total_input):
+def process_input(total_input, db_dict):
 
     allowed_list = ["SET", "GET", "DELETE", "COUNT"]
     
@@ -14,10 +14,17 @@ def process_input(total_input):
         if len(total_input.split()) != 3:
             print("please write proper SET command, e.g. SET a 10")
             return False
+        
+        db_dict[total_input.split()[1]] = total_input.split()[2]
 
+        return db_dict
+
+        
     
     
+db_space = {}
 
 while True:
-    command = input(">>>").strip()
-    process_input(command)
+    myinput = input(">>>").strip()
+    process_input(myinput, db_space)
+    print(db_space)
