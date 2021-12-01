@@ -17,20 +17,46 @@ def process_input(total_input, db_dict):
         
         db_dict[total_input.split()[1]] = total_input.split()[2]
 
-        return db_dict
+        return True
 
     #process GET
     if command == "GET":       
         if len(total_input.split()) != 2:
             print("please write proper GET command, e.g. GET a ")
-            return False
-        
+            return False      
         try:
             print(db_dict[total_input.split()[1]])
             return True
         except KeyError:
             print("please use proper variable")
             return False
+    
+    #process DELETE
+    if command == "DELETE":       
+        if len(total_input.split()) != 2:
+            print("please write proper DELETE command, e.g. DELETE a ")
+            return False
+        
+        try:
+            del db_dict[total_input.split()[1]]
+            return True
+        except KeyError:
+            print("please use proper variable")
+            return False
+
+    #process COUNT
+    if command == "COUNT":       
+        if len(total_input.split()) != 2:
+            print("please write proper COUNT command, e.g. COUNT 2 ")
+            return False
+        counter = 0
+       
+        for k, v in db_dict.items():
+            if v == total_input.split()[1]:
+                counter += 1
+        
+        print(counter)
+        return True
        
            
 db_space = {}
